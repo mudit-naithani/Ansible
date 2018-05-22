@@ -1,0 +1,28 @@
+Ansible: 
+Default directory : /etc/ansible
+YAML always starts with 3 hyphens : ---
+
+
+Commands:
+
+Copying files to remote servers					: Ansible abc -m copy -a "src = /etc/yum.conf dest = /tmp/yum.conf"
+
+Creating new directory 						: Ansible abc -m file -a "dest = /path/user1/new mode = 777 owner = user1 group = user1 state = directory" 
+
+Deleting whole directory					: Ansible abc -m file -a "dest = /path/user1/new state = absent"
+
+Info about all facts						: Ansible all -m setup
+
+Roles 								: predefined structure/template to be used to configure any application. Ex: role for apache (whatever is required for apache to run will be in the role, kind of a self sustained container in itself and this can be used anywhere else also as it is.)
+Default directory: /etc/ansible/roles
+Command to create a role for apache			: ansible-galaxy init apache --offline 
+
+Components of a ROLE:
+
+Defaults : Data about the role/appplication. Ex: Default variables
+Files    : Static files whih you might need to be pushed to remote machine
+Handlers : Tasks which are based on some actions like triggers and triggers are written under "notify". Ex: If the conf file(httpd.conf) changes for apache, the service should restart, so that code should be written in handler.
+Meta     : Information about the role. Ex: author name, supported platforms, dependencies etc.
+Taks     : Actual ations whiich need to be performed, i.e., actual code. Ex: installing the package, copying files etc.
+Template : Similar to fles except that they support modificatins, i.e., dynamic files. Wriitten in Jinja2 template language.
+Vars     : Both defaults and vars store variables, only differnce is variables stored in vars have "higher priority" & are dificult to override.
