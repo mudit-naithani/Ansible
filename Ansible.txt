@@ -1,7 +1,11 @@
 Ansible: 
+Installation: sudo apt-get install -y ansible
+Generate public private keys through ssh-keygen and put public keys in the remote servers
 Default directory : /etc/ansible
 YAML always starts with 3 hyphens : ---
 
+Module in ansible :
+Ping: can be used for health checks for all servers : ansible all -m ping
 
 Commands:
 
@@ -19,6 +23,9 @@ Roles 								: predefined structure/template to be used to configure any applic
 Default directory: /etc/ansible/roles
 Command to create a role for apache				: ansible-galaxy init apache --offline 
 
+ansible-playbook abc.yml
+ansible-playbook abc.yml --syntax-check
+
 Components of a ROLE:
 
 Defaults : Data about the role/appplication. Ex: Default variables
@@ -28,3 +35,17 @@ Meta     : Information about the role. Ex: author name, supported platforms, dep
 Tasks    : Actual actions which need to be performed, i.e., actual code. Ex: installing the package, copying files etc.
 Template : Similar to fles except that they support modificatins, i.e., dynamic files. Wriitten in Jinja2 template language.
 Vars     : Both defaults and vars store variables, only differnce is variables stored in vars have "higher priority" & are dificult to override.
+
+Common modules:
+
+1. File: Sets attributes of files.
+
+- file:
+    path: /etc/example.conf
+    owner: exampleowner
+    group: examplegroup
+    mode: 0755
+
+2. COPY
+3. SCRIPT
+4. SHELL
